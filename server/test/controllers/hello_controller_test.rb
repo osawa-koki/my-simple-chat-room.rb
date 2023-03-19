@@ -7,7 +7,9 @@ class HelloControllerTest < ActionDispatch::IntegrationTest
     test "should return hello message for #{name}" do
       get "/hello/#{name}"
       assert_response :success
-      assert_includes response.body, "Hello #{name}"
+
+      response_data = JSON.parse(response.body)
+      assert_equal "Hello #{name}", response_data["message"]
     end
   end
 end
