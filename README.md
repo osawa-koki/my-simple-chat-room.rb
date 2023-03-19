@@ -8,3 +8,15 @@
 gem install rails
 rails new . --database=sqlite3 --api
 ```
+
+### コントローラの作成
+
+```shell
+rails g controller コントローラ名 アクション名
+```
+
+### モデルの作成
+
+```shell
+rails g model モデル名 カラム名:データ型
+```
