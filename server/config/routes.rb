@@ -8,6 +8,7 @@ Rails.application.routes.draw do
     get '/hello/:name', to: 'hello#index'
 
     get '/user', to: 'user#get'
+    post '/user', to: 'user#post'
   end
 
   get '*path', to: 'static#index'
