@@ -6,4 +6,6 @@ Rails.application.routes.draw do
   # root "articles#index"
   match '/greet', to: 'greetings#greet', via: [:get, :post, :patch, :put, :delete]
   get '/hello/:name', to: 'hello#greet'
+
+  get '*path', to: 'static#index'
 end
