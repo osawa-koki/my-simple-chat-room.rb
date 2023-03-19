@@ -18,6 +18,15 @@ class Api::UserController < Api::ApiController
     end
   end
 
+  def delete
+    @user = User.find(params[:id])
+    if @user.destroy
+      render json: { message: 'User deleted' }, status: :ok
+    else
+      render json: { error: 'Failed to delete user' }, status: :unprocessable_entity
+    end
+  end
+
   private
 
   def user_params

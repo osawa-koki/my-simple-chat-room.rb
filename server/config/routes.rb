@@ -10,6 +10,7 @@ Rails.application.routes.draw do
     get '/user', to: 'user#get'
     post '/user', to: 'user#post'
     put '/user/:id', to: 'user#put'
+    delete '/user/:id', to: 'user#delete'
   end
 
   get '*path', to: 'static#index'
