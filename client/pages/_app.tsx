@@ -20,7 +20,7 @@ export default function MyApp({ Component, pageProps }: AppProps) {
 
   const [sharedData, setSharedData] = useState<SharedData>({
     username: '',
-    email: 'osawa-koki@example.com',
+    messages: [],
   });
 
   return (
