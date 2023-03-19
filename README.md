@@ -19,4 +19,5 @@ rails g controller コントローラ名 アクション名
 
 ```shell
 rails g model モデル名 カラム名:データ型
+rails db:migrate
 ```
