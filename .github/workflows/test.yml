@@ -26,6 +26,11 @@ jobs:
           gem install bundler
           bundle install
         working-directory: ${{ env.server-directory }}
+      - name: Setup database
+        run: |
+          rails db:create
+          rails db:migrate
+        working-directory: ${{ env.server-directory }}
       - name: Run Minitest tests
         run: rails test
         working-directory: ${{ env.server-directory }}
