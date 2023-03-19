@@ -9,7 +9,7 @@ class HelloControllerTest < ActionDispatch::IntegrationTest
       assert_response :success
 
       response_data = JSON.parse(response.body)
-      assert_equal "Hello #{name}", response_data["message"]
+      assert_equal "Hello #{name}.", response_data["message"]
     end
   end
 end
