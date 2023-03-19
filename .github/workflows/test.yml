@@ -29,7 +29,7 @@ jobs:
       - name: Setup database
         run: |
           rails db:create
-          rails db:migrate
+          rails db:migrate RAILS_ENV=test
         working-directory: ${{ env.server-directory }}
       - name: Run Minitest tests
         run: rails test
