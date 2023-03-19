@@ -9,6 +9,7 @@ Rails.application.routes.draw do
 
     get '/user', to: 'user#get'
     post '/user', to: 'user#post'
+    put '/user/:id', to: 'user#put'
   end
 
   get '*path', to: 'static#index'
