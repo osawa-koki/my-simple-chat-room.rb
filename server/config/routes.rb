@@ -6,6 +6,8 @@ Rails.application.routes.draw do
   namespace :api do
     match '/greet', to: 'greetings#index', via: [:get, :post, :patch, :put, :delete]
     get '/hello/:name', to: 'hello#index'
+
+    get '/user', to: 'user#get'
   end
 
   get '*path', to: 'static#index'

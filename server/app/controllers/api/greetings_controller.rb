@@ -1,4 +1,4 @@
-class Api::GreetingsController < ApplicationController
+class Api::GreetingsController < Api::ApiController
   def index
     http_method = request.method
     message = "Hello #{http_method}."
