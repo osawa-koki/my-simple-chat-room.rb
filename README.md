@@ -6,5 +6,5 @@
 
 ```shell
 gem install rails
-rails new . --database=sqlite3 --skip-git --api
+rails new . --database=sqlite3 --api
 ```
