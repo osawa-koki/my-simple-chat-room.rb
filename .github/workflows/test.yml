@@ -29,4 +29,3 @@ jobs:
       - name: Run Minitest tests
         run: rails test
         working-directory: ${{ env.server-directory }}
- 
