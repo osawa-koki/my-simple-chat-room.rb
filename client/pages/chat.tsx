@@ -23,7 +23,10 @@ export default function ContactPage() {
     if (socket) {
       socket.onopen = () => {
         setReady(true);
-        console.log('Connected to server');
+        socket.send(JSON.stringify({
+          command: 'subscribe',
+          identifier: JSON.stringify({ channel: 'ChatChannel' }),
+        }));
       };
       socket.onmessage = (event) => {
         const data = JSON.parse(event.data);
@@ -58,8 +61,13 @@ export default function ContactPage() {
   const Send = () => {
     if (socket) {
       socket.send(JSON.stringify({
-        username: sharedData.username,
-        message: message,
+        command: 'message',
+        identifier: JSON.stringify({
+          channel: 'ChatChannel'
+        }),
+        data: JSON.stringify({
+          message: message,
+        }),
       }));
     }
   };
