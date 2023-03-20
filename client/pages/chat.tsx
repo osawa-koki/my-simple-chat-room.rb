@@ -14,7 +14,7 @@ export default function ContactPage() {
   const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
-    const socket = new WebSocket('ws://localhost:8000/chat');
+    const socket = new WebSocket('ws://localhost:8000/cable');
     setSocket(socket);
     console.log(socket);
   }, []);
@@ -26,16 +26,24 @@ export default function ContactPage() {
         console.log('Connected to server');
       };
       socket.onmessage = (event) => {
-        const reader = new FileReader();
-        reader.readAsText(event.data);
-        reader.onload = () => {
-          console.log('Message from server ', reader.result);
-          const data = JSON.parse(reader.result as string);
+        const data = JSON.parse(event.data);
+        console.log(data);
+
+        if (data.type === 'ping') {
+          socket.send(JSON.stringify({
+            type: 'pong',
+            message: data.message
+          }));
+        } else if (data.type === 'confirm_subscription') {
+          console.log('Subscribed to channel');
+        } else if (data.type === 'welcome') {
+          console.log('Welcome message');
+        } else if (data.type === 'message') {
           setSharedData({
             ...sharedData,
-            messages: [data, ...sharedData.messages],
+            messages: [...sharedData.messages, data.message]
           });
-        };
+        }
       };
       socket.onclose = (event) => {
         console.log('Socket closed connection: ', event);
