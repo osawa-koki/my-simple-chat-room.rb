@@ -122,8 +122,8 @@ export default function ContactPage() {
         <Table striped bordered hover className="mt-3">
           <thead>
             <tr>
-              <th>Username</th>
-              <th>Message</th>
+              <th className="w-25">Username</th>
+              <th className="w-75">Message</th>
             </tr>
           </thead>
           <tbody>
