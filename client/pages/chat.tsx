@@ -4,6 +4,7 @@ import { Button, Alert, Form, Spinner, Table } from 'react-bootstrap';
 import Layout from "../components/Layout";
 
 import { DataContext } from "../src/DataContext";
+import { Message } from "../src/SharedData";
 
 export default function ContactPage() {
 
@@ -30,22 +31,31 @@ export default function ContactPage() {
       };
       socket.onmessage = (event) => {
         const data = JSON.parse(event.data);
-        console.log(data);
-
-        if (data.type === 'ping') {
-          socket.send(JSON.stringify({
-            type: 'pong',
-            message: data.message
-          }));
-        } else if (data.type === 'confirm_subscription') {
-          console.log('Subscribed to channel');
-        } else if (data.type === 'welcome') {
-          console.log('Welcome message');
-        } else if (data.type === 'message') {
-          setSharedData({
-            ...sharedData,
-            messages: [...sharedData.messages, data.message]
-          });
+        // console.log(`data: ${JSON.stringify(data)}`);
+        // console.log(`data type: ${data.type}`);
+        switch (data.type) {
+          case 'ping':
+            socket.send(JSON.stringify({
+              type: 'pong',
+              message: "pong!!!",
+            }));
+            break;
+          case 'confirm_subscription':
+            console.log('Subscribed to channel');
+            break;
+          case 'welcome':
+            console.log('Welcome message');
+            break;
+          default:
+            console.log(`Message received: ${JSON.stringify(data.message.message)}`);
+            setSharedData({
+              ...sharedData,
+              messages: [{
+                username: data.message.message.username,
+                message: data.message.message.message,
+              } as Message, ...sharedData.messages],
+            });
+            break;
         }
       };
       socket.onclose = (event) => {
@@ -66,7 +76,10 @@ export default function ContactPage() {
           channel: 'ChatChannel'
         }),
         data: JSON.stringify({
-          message: message,
+          message: {
+            username: sharedData.username,
+            message: message,
+          },
         }),
       }));
     }

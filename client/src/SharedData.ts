@@ -9,3 +9,4 @@ type Message = {
 }
 
 export default SharedData;
+export type { Message };
