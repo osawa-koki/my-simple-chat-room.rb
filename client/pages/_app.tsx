@@ -19,7 +19,7 @@ import SharedData from '../src/SharedData';
 export default function MyApp({ Component, pageProps }: AppProps) {
 
   const [sharedData, setSharedData] = useState<SharedData>({
-    username: '',
+    username: 'user_xxxxx',
     messages: [],
   });
 

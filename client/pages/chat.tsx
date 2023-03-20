@@ -19,7 +19,7 @@ function checkStringsNotNullOrEmpty(...params: (string | null)[]): boolean {
 export default function ContactPage() {
 
   const { sharedData, setSharedData } = React.useContext(DataContext);
-  const [message, setMessage] = useState<string>('');
+  const [message, setMessage] = useState<string>('Hello World!!!');
   const [socket, setSocket] = useState<WebSocket>();
   const [ready, setReady] = useState<boolean>(false);
   const [error, setError] = useState<string | null>(null);
