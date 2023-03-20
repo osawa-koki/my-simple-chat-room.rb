@@ -11,6 +11,21 @@ docker build -t my-simple-chat-room-rb .
 docker run -it -p 8000:8000 --name my-simple-chat-room-rb my-simple-chat-room-rb
 ```
 
+## 使用している技術
+
+- Next.js
+  - React
+  - TypeScript
+  - Bootstrap
+- Ruby
+  - Ruby on Rails
+  - API mode
+  - Action Cable (WebSocket)
+- Docker
+- GitHub
+  - Repository
+  - GitHub Actions
+
 ## 自分用メモ
 
 転職先の企業でRuby(Rails)を使うことになったので、学習用に、、、  
