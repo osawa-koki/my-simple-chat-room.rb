@@ -1,11 +1,30 @@
 # my-simple-chat-room.rb
 
+🐠🐠🐠 `Ruby on Rails` × `Next.js`で作成した簡単なチャットアプリです。  
+
+![成果物](./docs/img/fruit.gif)  
+
 ## 実行方法
 
 ```shell
 docker build -t my-simple-chat-room-rb .
 docker run -it -p 8000:8000 --name my-simple-chat-room-rb my-simple-chat-room-rb
 ```
+
+## 使用している技術
+
+- Next.js
+  - React
+  - TypeScript
+  - Bootstrap
+- Ruby
+  - Ruby on Rails
+  - API mode
+  - Action Cable (WebSocket)
+- Docker
+- GitHub
+  - Repository
+  - GitHub Actions
 
 ## 自分用メモ
 
