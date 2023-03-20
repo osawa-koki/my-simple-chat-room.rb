@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 
 import { Button, Alert, Form, Spinner, Table } from 'react-bootstrap';
 import Layout from "../components/Layout";
+import setting from "../setting";
 
 import { DataContext } from "../src/DataContext";
 import { Message } from "../src/SharedData";
@@ -15,7 +16,20 @@ export default function ContactPage() {
   const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
-    const socket = new WebSocket('ws://localhost:8000/cable');
+    const socket = new WebSocket(setting.wsPath === null ?
+      (() => {
+        // 本番環境
+        const protocol = window.location.protocol === 'https:' ? 'wss:' : 'ws:';
+        const host = window.location.host;
+        const path = window.location.pathname;
+        if (host && path) {
+          return `${protocol}//${host}/cable`;
+        }
+      })()
+      :
+      // 開発環境
+      `${setting.wsPath}/cable`
+    );
     setSocket(socket);
     console.log(socket);
   }, []);
