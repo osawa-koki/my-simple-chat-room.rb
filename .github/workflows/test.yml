@@ -1,0 +1,36 @@
+name: Minitest Tests
+
+on:
+  push:
+    branches:
+      - develop
+
+env:
+  server-directory: ./server
+
+jobs:
+  test:
+    strategy:
+      matrix:
+        ruby: ['3.2.1']
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+      - name: Setup Ruby
+        uses: ruby/setup-ruby@v1
+        with:
+          ruby-version: ${{ matrix.ruby }}
+      - name: Install dependencies
+        run: |
+          gem install bundler
+          bundle install
+        working-directory: ${{ env.server-directory }}
+      - name: Setup database
+        run: |
+          rails db:create
+          rails db:migrate RAILS_ENV=test
+        working-directory: ${{ env.server-directory }}
+      - name: Run Minitest tests
+        run: rails test
+        working-directory: ${{ env.server-directory }}
