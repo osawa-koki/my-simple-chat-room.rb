@@ -7,6 +7,15 @@ import setting from "../setting";
 import { DataContext } from "../src/DataContext";
 import { Message } from "../src/SharedData";
 
+function checkStringsNotNullOrEmpty(...params: (string | null)[]): boolean {
+  for (const param of params) {
+    if (param === null || typeof param !== 'string' || param.trim() === '') {
+      return false;
+    }
+  }
+  return true;
+}
+
 export default function ContactPage() {
 
   const { sharedData, setSharedData } = React.useContext(DataContext);
@@ -114,8 +123,15 @@ export default function ContactPage() {
             <Form.Label>Message</Form.Label>
             <Form.Control type="text" placeholder="Enter message" value={message} onInput={(e) => {setMessage(e.currentTarget.value)}}/>
           </Form.Group>
-          <Button variant="primary" className="mt-3 d-block m-auto" onClick={Send} disabled={ready === false}>Send 📨</Button>
+          <Button variant="primary" className="mt-3 d-block m-auto" onClick={Send} disabled={ready === false || checkStringsNotNullOrEmpty(sharedData.username, message) === false}>Send 📨</Button>
         </Form>
+        {
+          checkStringsNotNullOrEmpty(sharedData.username, message) === false && (
+            <Alert variant="warning" className="mt-3">
+              Please enter username and message.
+            </Alert>
+          )
+        }
         {
           error && <Alert variant="danger" className="mt-3">{error}</Alert>
         }
