@@ -9,7 +9,7 @@ env:
   server-directory: ./server
 
 jobs:
-  test:
+  rails-test:
     strategy:
       matrix:
         ruby: ['3.2.1']
@@ -34,3 +34,21 @@ jobs:
       - name: Run Minitest tests
         run: rails test
         working-directory: ${{ env.server-directory }}
+  nextjs-test:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        node: ['16', '18']
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v3
+    - name: Use Node.js
+      uses: actions/setup-node@v3
+      with:
+        node-version: ${{ matrix.node }}
+    - name: Install dependencies
+      run: yarn install
+      working-directory: ${{ env.client_directory }}
+    - name: Run tests
+      run: yarn test
+      working-directory: ${{ env.client_directory }}
