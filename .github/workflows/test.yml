@@ -7,6 +7,7 @@ on:
 
 env:
   server-directory: ./server
+  client-directory: ./client
 
 jobs:
   rails-test:
