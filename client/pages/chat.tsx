@@ -16,6 +16,7 @@ export default function ContactPage() {
   useEffect(() => {
     const socket = new WebSocket('ws://localhost:8000/chat');
     setSocket(socket);
+    console.log(socket);
   }, []);
 
   useEffect(() => {
