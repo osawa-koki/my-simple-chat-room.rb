@@ -1,5 +1,12 @@
 # my-simple-shat-room.rb
 
+## 実行方法
+
+```shell
+docker build -t my-simple-shat-room-rb .
+docker run -it -p 8000:8000 --name my-simple-shat-room-rb my-simple-shat-room-rb
+```
+
 ## 自分用メモ
 
 転職先の企業でRuby(Rails)を使うことになったので、学習用に、、、  
