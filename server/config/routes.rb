@@ -13,5 +13,7 @@ Rails.application.routes.draw do
     delete '/user/:id', to: 'user#delete'
   end
 
+  mount ActionCable.server => '/cable'
+
   get '*path', to: 'static#index'
 end
