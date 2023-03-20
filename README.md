@@ -1,10 +1,10 @@
-# my-simple-shat-room.rb
+# my-simple-chat-room.rb
 
 ## 実行方法
 
 ```shell
-docker build -t my-simple-shat-room-rb .
-docker run -it -p 8000:8000 --name my-simple-shat-room-rb my-simple-shat-room-rb
+docker build -t my-simple-chat-room-rb .
+docker run -it -p 8000:8000 --name my-simple-chat-room-rb my-simple-chat-room-rb
 ```
 
 ## 自分用メモ

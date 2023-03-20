@@ -6,7 +6,7 @@ const setting = {
   basePath: Env.basePath,
   apiPath: isProd ? '' : 'http://localhost:8000',
   wsPath: isProd ? null : 'ws://localhost:8000',
-  title: '🐦 my-simple-shat-room-rb 🐦',
+  title: '🐦 my-simple-chat-room-rb 🐦',
 };
 
 export default setting;
