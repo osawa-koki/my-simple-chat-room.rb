@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 
-import { Button, Alert, Form, Spinner } from 'react-bootstrap';
+import { Button, Alert, Form, Spinner, Table } from 'react-bootstrap';
 import Layout from "../components/Layout";
 
 import { DataContext } from "../src/DataContext";
@@ -26,7 +26,16 @@ export default function ContactPage() {
         console.log('Connected to server');
       };
       socket.onmessage = (event) => {
-        console.log('Message from server ', event.data);
+        const reader = new FileReader();
+        reader.readAsText(event.data);
+        reader.onload = () => {
+          console.log('Message from server ', reader.result);
+          const data = JSON.parse(reader.result as string);
+          setSharedData({
+            ...sharedData,
+            messages: [data, ...sharedData.messages],
+          });
+        };
       };
       socket.onclose = (event) => {
         console.log('Socket closed connection: ', event);
@@ -36,7 +45,16 @@ export default function ContactPage() {
         setError('Socket encountered an error.');
       };
     }
-  }, [socket]);
+  }, [setSharedData, sharedData, socket]);
+
+  const Send = () => {
+    if (socket) {
+      socket.send(JSON.stringify({
+        username: sharedData.username,
+        message: message,
+      }));
+    }
+  };
 
   return (
     <Layout>
@@ -55,7 +73,7 @@ export default function ContactPage() {
             <Form.Label>Message</Form.Label>
             <Form.Control type="text" placeholder="Enter message" value={message} onInput={(e) => {setMessage(e.currentTarget.value)}}/>
           </Form.Group>
-          <Button variant="primary" className="mt-3 d-block m-auto" disabled={ready === false}>Send 📨</Button>
+          <Button variant="primary" className="mt-3 d-block m-auto" onClick={Send} disabled={ready === false}>Send 📨</Button>
         </Form>
         {
           error && <Alert variant="danger" className="mt-3">{error}</Alert>
@@ -74,6 +92,24 @@ export default function ContactPage() {
             </div>
           )
         }
+        <Table striped bordered hover className="mt-3">
+          <thead>
+            <tr>
+              <th>Username</th>
+              <th>Message</th>
+            </tr>
+          </thead>
+          <tbody>
+            {
+              sharedData.messages.map((message, index) => (
+                <tr key={index}>
+                  <td>{message.username}</td>
+                  <td>{message.message}</td>
+                </tr>
+              ))
+            }
+          </tbody>
+        </Table>
       </div>
     </Layout>
   );
