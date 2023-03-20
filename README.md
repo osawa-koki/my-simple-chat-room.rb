@@ -1,5 +1,9 @@
 # my-simple-chat-room.rb
 
+🐠🐠🐠 `Ruby on Rails` × `Next.js`で作成した簡単なチャットアプリです。  
+
+![成果物](./docs/img/fruit.gif)  
+
 ## 実行方法
 
 ```shell
