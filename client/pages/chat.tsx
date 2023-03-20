@@ -31,8 +31,6 @@ export default function ContactPage() {
       };
       socket.onmessage = (event) => {
         const data = JSON.parse(event.data);
-        // console.log(`data: ${JSON.stringify(data)}`);
-        // console.log(`data type: ${data.type}`);
         switch (data.type) {
           case 'ping':
             socket.send(JSON.stringify({
